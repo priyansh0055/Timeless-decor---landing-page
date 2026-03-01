@@ -218,10 +218,13 @@ h1 em {
 
 .hero-card-slide {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    transform: translateX(100%);
-    animation: shuffle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform: scale(0.92);
+    animation: stackShuffle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .hero-card-slide:nth-child(1) {
@@ -229,48 +232,46 @@ h1 em {
 }
 
 .hero-card-slide:nth-child(2) {
-    animation-delay: -10.5s;
+    animation-delay: 3.5s;
 }
 
 .hero-card-slide:nth-child(3) {
-    animation-delay: -7s;
+    animation-delay: 7.0s;
 }
 
 .hero-card-slide:nth-child(4) {
-    animation-delay: -3.5s;
+    animation-delay: 10.5s;
 }
 
-@keyframes shuffle {
+@keyframes stackShuffle {
+    0% {
+        opacity: 0;
+        transform: scale(0.92);
+        z-index: 1;
+    }
 
-    0%,
-    20.7143% {
+    5% {
         opacity: 1;
-        transform: translateX(0);
+        transform: scale(1);
+        z-index: 2;
     }
 
     25% {
         opacity: 1;
-        transform: translateX(-100%);
+        transform: scale(1);
+        z-index: 2;
     }
 
-    25.0001% {
+    30% {
         opacity: 0;
-        transform: translateX(-100%);
-    }
-
-    95.7142% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-
-    95.7143% {
-        opacity: 1;
-        transform: translateX(100%);
+        transform: scale(0.92);
+        z-index: 1;
     }
 
     100% {
-        opacity: 1;
-        transform: translateX(0);
+        opacity: 0;
+        transform: scale(0.92);
+        z-index: 0;
     }
 }
 
@@ -285,6 +286,8 @@ h1 em {
     gap: 1rem;
     position: relative;
     z-index: 2;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 .product-icon {
@@ -314,8 +317,8 @@ h1 em {
 
 .hero-badge {
     position: absolute;
-    bottom: -20px;
-    left: -20px;
+    bottom: -18px;
+    left: -18px;
     width: 110px;
     height: 110px;
     background: var(--dark);
@@ -327,6 +330,46 @@ h1 em {
     justify-content: center;
     text-align: center;
     z-index: 3;
+    box-shadow: 4px 6px 18px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: rotate(-8deg);
+    border: 2.5px solid rgba(255, 255, 255, 0.12);
+    animation: stickerPop 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.hero-card-slide:nth-child(1) .hero-badge {
+    animation-delay: 0s;
+}
+
+.hero-card-slide:nth-child(2) .hero-badge {
+    animation-delay: 3.5s;
+}
+
+.hero-card-slide:nth-child(3) .hero-badge {
+    animation-delay: 7.0s;
+}
+
+.hero-card-slide:nth-child(4) .hero-badge {
+    animation-delay: 10.5s;
+}
+
+@keyframes stickerPop {
+
+    0%,
+    4.99% {
+        transform: rotate(-8deg) scale(0);
+    }
+
+    5% {
+        transform: rotate(-8deg) scale(1.08);
+    }
+
+    8% {
+        transform: rotate(-8deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(-8deg) scale(1);
+    }
 }
 
 .hero-badge span:first-child {
